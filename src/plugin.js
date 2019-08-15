@@ -1,18 +1,21 @@
+const fs = require('fs');
 const _ = require('lodash');
 const GoogleDriveApi = require('./api');
 
 const REQUIRED_VARAIBLES = [
     'USER_EMAIL',
-    'SERVICE_ACCOUNT_EMAIL',
-    // 'SERVICE_ACCOUNT_PRIVATE_KEY',
 ];
 
 // checking config
 function getConfig() {
+    let json = {};
+    if (fs.existsSync(`${__dirname}/../jwt.keys.json`)) {
+        json = require('../jwt.keys.json');
+    }
     const config = {
         user: process.env.USER_EMAIL,
-        client_email: process.env.SERVICE_ACCOUNT_EMAIL,
-        private_key: process.env.SERVICE_ACCOUNT_PRIVATE_KEY || require('../jwt.keys').private_key,
+        client_email: process.env.SERVICE_ACCOUNT_EMAIL || json.client_email,
+        private_key: process.env.SERVICE_ACCOUNT_PRIVATE_KEY || json.private_key,
     };
 
     REQUIRED_VARAIBLES.forEach((variable) => {
