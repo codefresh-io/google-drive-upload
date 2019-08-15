@@ -1,0 +1,79 @@
+kind: step-type
+version: '1.0'
+metadata:
+  name: codefresh-inc/google-drive-upload
+  isPublic: true
+  description: Uploads files to Google Drive
+  sources:
+    - >-
+      https://github.com/codefresh-io/google-drive-upload
+  stage: graduated
+  maintainers:
+    - name: Andrii Shaforostov
+      email: andrii@codefresh.io
+  categories:
+    - storage
+  official: false
+  tags: []
+  icon:
+    type: svg
+    url: https://upload.wikimedia.org/wikipedia/commons/7/75/Google_Drive_Logo.svg
+    background: "#f4f4f4"
+  examples:
+    - description: example-1
+      workflow:
+        version: '1.0'
+        steps:
+          upload:
+            title: Upload to Google Drive
+            type: codefresh-inc/google-drive-upload
+            arguments:
+              VARIABLE:
+                - USER_EMAIL=user@gmail.com
+                - SERVICE_ACCOUNT_EMAIL=servicename@projectname.iam.gserviceaccount.com
+                - SERVICE_ACCOUNT_PRIVATE_KEY=<base64_of_private_key>
+                - UPLOAD_FILE_1=["./README.md", "README.md", "text/plain"]
+spec:
+  arguments: |-
+    {
+        "definitions": {},
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "type": "object",
+        "additionalProperties": false,
+        "patterns": [],
+        "required": [
+            "PIPELINE_ID",
+            "SERVICE_ACCOUNT_EMAIL",
+            "SERVICE_ACCOUNT_PRIVATE_KEY"
+        ],
+        "properties": {
+            "USER_EMAIL": {
+                "type": "string",
+                "description": "Files will be shared with this user"
+            },
+            "SERVICE_ACCOUNT_EMAIL": {
+                "type": "string",
+                "description": "service account for file uploading",
+                "default": "driveservice@js-test-project-1301.iam.gserviceaccount.com"
+            },
+            "SERVICE_ACCOUNT_PRIVATE_KEY": {
+                "type": "string",
+                "description": "Base64 of private key of service account"
+            },
+            "UPLOAD_FILE_1": {
+                "type": "string",
+                "description": "File description",
+                "examples": ["./README.md", "README.md", "text/plain"],
+                "default": ""
+            }
+        }
+    }
+  steps:
+    upload:
+      title: Upload to Google Drive
+      image: codefresh/google-drive-plugin
+      environment:
+        - USER_EMAIL=${{USER_EMAIL}}
+        - SERVICE_ACCOUNT_EMAIL=${{SERVICE_ACCOUNT_EMAIL}}
+        - SERVICE_ACCOUNT_PRIVATE_KEY=${{SERVICE_ACCOUNT_PRIVATE_KEY}}
+        - UPLOAD_FILE_1=${{UPLOAD_FILE_1}}
