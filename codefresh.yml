@@ -1,0 +1,27 @@
+version: '1.0'
+
+steps:
+  main_clone:
+    title: Cloning repository
+    type: git-clone
+    repo: '${{CF_REPO_OWNER}}/${{CF_REPO_NAME}}'
+    revision: '${{CF_REVISION}}'
+    git: cf_github
+
+  build_step:
+    title: Building production image
+    type: build
+    dockerfile: Dockerfile
+    tag: '${{CF_BRANCH_TAG_NORMALIZED}}'
+    image_name: codefresh/google-drive-plugin
+
+  PushingToDockerRegistry:
+    title: Pushing to Docker Registry
+    type: push
+    candidate: '${{build_step}}'
+    tag: 'latest'
+    registry: dockerhub
+    when:
+      branch:
+        only:
+          - master
