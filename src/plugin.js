@@ -12,7 +12,7 @@ function getConfig() {
     const config = {
         user: process.env.USER_EMAIL,
         client_email: process.env.SERVICE_ACCOUNT_EMAIL,
-        private_key: process.env.SERVICE_ACCOUNT_PRIVATE_KEY || require('./jwt.keys').private_key,
+        private_key: process.env.SERVICE_ACCOUNT_PRIVATE_KEY || require('../jwt.keys').private_key,
     };
 
     REQUIRED_VARAIBLES.forEach((variable) => {
