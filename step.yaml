@@ -28,11 +28,9 @@ metadata:
             title: Upload to Google Drive
             type: codefresh-inc/google-drive-upload
             arguments:
-              VARIABLE:
-                - USER_EMAIL=user@gmail.com
-                - SERVICE_ACCOUNT_EMAIL=servicename@projectname.iam.gserviceaccount.com
-                - SERVICE_ACCOUNT_PRIVATE_KEY=<base64_of_private_key>
-                - UPLOAD_FILE_1=["./README.md", "README.md", "text/plain"]
+              USER_EMAIL: user@gmail.com
+              SERVICE_ACCOUNT_EMAIL: servicename@projectname.iam.gserviceaccount.com
+              UPLOAD_FILE_1: ["./README.md", "README.md", "text/plain"]
 spec:
   arguments: |-
     {
@@ -54,17 +52,12 @@ spec:
             "SERVICE_ACCOUNT_EMAIL": {
                 "type": "string",
                 "description": "service account for file uploading",
-                "default": "driveservice@js-test-project-1301.iam.gserviceaccount.com"
-            },
-            "SERVICE_ACCOUNT_PRIVATE_KEY": {
-                "type": "string",
-                "description": "Base64 of private key of service account"
+                "examples": ["servicename@projectname.iam.gserviceaccount.com"]
             },
             "UPLOAD_FILE_1": {
                 "type": "string",
-                "description": "File description",
-                "examples": ["./README.md", "README.md", "text/plain"],
-                "default": ""
+                "description": "File description. Array from `path`, `file name on Drive`, `MIME type`",
+                "examples": [["./README.md", "README.md", "text/plain"]]
             }
         }
     }
@@ -72,8 +65,8 @@ spec:
     upload:
       title: Upload to Google Drive
       image: codefresh/google-drive-plugin
-      environment:
-        - USER_EMAIL=${{USER_EMAIL}}
-        - SERVICE_ACCOUNT_EMAIL=${{SERVICE_ACCOUNT_EMAIL}}
-        - SERVICE_ACCOUNT_PRIVATE_KEY=${{SERVICE_ACCOUNT_PRIVATE_KEY}}
-        - UPLOAD_FILE_1=${{UPLOAD_FILE_1}}
+#      environment:
+#        - USER_EMAIL=${{USER_EMAIL}}
+#        - SERVICE_ACCOUNT_EMAIL=${{SERVICE_ACCOUNT_EMAIL}}
+#        - SERVICE_ACCOUNT_PRIVATE_KEY=${{SERVICE_ACCOUNT_PRIVATE_KEY}}
+#        - UPLOAD_FILE_1=${{UPLOAD_FILE_1}}
