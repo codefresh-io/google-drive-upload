@@ -28,7 +28,7 @@ metadata:
             title: Upload to Google Drive
             type: codefresh-inc/google-drive-upload
             environment:
-              - GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY=<base64 encoded service account private key>
+              - GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY=<base64_encoded_service_account_private_key>
             arguments:
               USER_EMAIL: user@gmail.com
               SERVICE_ACCOUNT_EMAIL: servicename@projectname.iam.gserviceaccount.com

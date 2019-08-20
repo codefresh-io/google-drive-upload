@@ -1,9 +1,10 @@
-const fs = require('fs');
 const _ = require('lodash');
 const GoogleDriveApi = require('./api');
 
 const REQUIRED_VARAIBLES = [
     'USER_EMAIL',
+    'SERVICE_ACCOUNT_EMAIL',
+    'GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY',
 ];
 
 // checking config
@@ -29,13 +30,12 @@ function getConfig() {
 }
 
 async function runPlugin() {
-    console.log(JSON.stringify(process.env));
     const config = getConfig();
 
     // Parse files
     const vars = Object.entries(process.env).map(([key, value]) => {
         if (/^UPLOAD_FILE_/.test(key)) {
-            const [path, name, contentType] = JSON.parse(value);
+            const [path, name, contentType] = value;
             return { path, name, contentType };
         }
 
