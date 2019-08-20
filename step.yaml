@@ -27,6 +27,8 @@ metadata:
           upload:
             title: Upload to Google Drive
             type: codefresh-inc/google-drive-upload
+            environment:
+              - GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY=<base64 encoded service account private key>
             arguments:
               USER_EMAIL: user@gmail.com
               SERVICE_ACCOUNT_EMAIL: servicename@projectname.iam.gserviceaccount.com
@@ -52,11 +54,6 @@ spec:
                 "description": "service account for file uploading",
                 "examples": ["servicename@projectname.iam.gserviceaccount.com"]
             },
-            "SERVICE_ACCOUNT_PRIVATE_KEY": {
-                "type": "string",
-                "description": "base64 encoded service account private key",
-                "default": "${{SERVICE_ACCOUNT_PRIVATE_KEY}}"
-            },
             "UPLOAD_FILE_1": {
                 "type": "array",
                 "items": {
@@ -71,8 +68,7 @@ spec:
     upload:
       title: Upload to Google Drive
       image: codefresh/google-drive-plugin
-#      environment:
-#        - USER_EMAIL=${{USER_EMAIL}}
-#        - SERVICE_ACCOUNT_EMAIL=${{SERVICE_ACCOUNT_EMAIL}}
-#        - SERVICE_ACCOUNT_PRIVATE_KEY=${{SERVICE_ACCOUNT_PRIVATE_KEY}}
-#        - UPLOAD_FILE_1=${{UPLOAD_FILE_1}}
+      environment:
+        - USER_EMAIL=${{USER_EMAIL}}
+        - SERVICE_ACCOUNT_EMAIL=${{SERVICE_ACCOUNT_EMAIL}}
+        - UPLOAD_FILE_1=${{UPLOAD_FILE_1}}

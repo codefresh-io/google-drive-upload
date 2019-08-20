@@ -8,14 +8,14 @@ const REQUIRED_VARAIBLES = [
 
 // checking config
 function getConfig() {
-    if (process.env.SERVICE_ACCOUNT_PRIVATE_KEY) {
-        process.env.SERVICE_ACCOUNT_PRIVATE_KEY = new Buffer(process.env.SERVICE_ACCOUNT_PRIVATE_KEY, 'base64').toString('utf-8');
+    if (process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY) {
+        process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY = new Buffer(process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY, 'base64').toString('utf-8');
     }
 
     const config = {
         user: process.env.USER_EMAIL,
         client_email: process.env.SERVICE_ACCOUNT_EMAIL,
-        private_key: process.env.SERVICE_ACCOUNT_PRIVATE_KEY,
+        private_key: process.env.GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY,
     };
 
     REQUIRED_VARAIBLES.forEach((variable) => {
