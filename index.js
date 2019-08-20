@@ -7,7 +7,7 @@ plugin()
         response.success.forEach((file, index) => {
             console.log(`_file ${index + 1}_`);
             console.log(`contentType: ${file.mimeType}`);
-            console.log(`fileName: ${file.name}`);
+            console.log(`fileName: ${file.path}`);
         });
 
         response.error.forEach((error, index) => {

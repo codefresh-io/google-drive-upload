@@ -35,9 +35,7 @@ async function runPlugin() {
     // Parse files
     const vars = Object.entries(process.env).map(([key, value]) => {
         if (/^UPLOAD_FILE_/.test(key)) {
-            const [path, name, contentType] = value;
-            console.log(value);
-            console.log(path, name, contentType);
+            const [path, name, contentType] = value.split(',');
             return { path, name, contentType };
         }
 
