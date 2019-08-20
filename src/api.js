@@ -52,7 +52,7 @@ class GoogleDriveClient {
                     },
                 });
 
-                result.success.push(f.data);
+                result.success.push({ ...f.data, path: file.path });
             } catch (error) {
                 result.error.push(error);
             }
