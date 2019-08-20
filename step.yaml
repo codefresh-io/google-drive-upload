@@ -40,9 +40,7 @@ spec:
         "additionalProperties": false,
         "patterns": [],
         "required": [
-            "PIPELINE_ID",
-            "SERVICE_ACCOUNT_EMAIL",
-            "SERVICE_ACCOUNT_PRIVATE_KEY"
+            "SERVICE_ACCOUNT_EMAIL"
         ],
         "properties": {
             "USER_EMAIL": {
@@ -54,8 +52,16 @@ spec:
                 "description": "service account for file uploading",
                 "examples": ["servicename@projectname.iam.gserviceaccount.com"]
             },
-            "UPLOAD_FILE_1": {
+            "SERVICE_ACCOUNT_PRIVATE_KEY": {
                 "type": "string",
+                "description": "base64 encoded service account private key",
+                "default": "${{SERVICE_ACCOUNT_PRIVATE_KEY}}"
+            },
+            "UPLOAD_FILE_1": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
                 "description": "File description. Array from `path`, `file name on Drive`, `MIME type`",
                 "examples": [["./README.md", "README.md", "text/plain"]]
             }

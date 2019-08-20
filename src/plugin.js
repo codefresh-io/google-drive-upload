@@ -29,6 +29,7 @@ function getConfig() {
 }
 
 async function runPlugin() {
+    console.log(JSON.stringify(process.env));
     const config = getConfig();
 
     // Parse files

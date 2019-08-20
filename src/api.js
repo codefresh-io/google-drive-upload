@@ -1,11 +1,6 @@
 const { google } = require('googleapis');
 const Promise = require('bluebird');
 const fs = require('fs');
-// const path = require('path');
-// const { client_email, private_key } = require('./jwt.keys');
-
-let drive;
-let user;
 
 class GoogleDriveClient {
     constructor(config) {
@@ -67,57 +62,4 @@ class GoogleDriveClient {
     }
 }
 
-async function runSample() {
-    const res = await drive.files.list({
-        pageSize: 10,
-        // fields: 'nextPageToken, files(id, name)',
-    });
-    const about = await drive.about.get({
-        fields: 'user',
-    });
-    const perm = await drive.permissions.list({
-        fileId: '0B_uEsCKoieGEc3RhcnRlcl9maWxl',
-        // fields: 'nextPageToken, files(id, name)',
-    });
-    const one = await drive.permissions.get({
-        fileId: '0B_uEsCKoieGEc3RhcnRlcl9maWxl',
-        permissionId: '11281608261086712464',
-        // supportsAllDrives: true,
-        // useDomainAdminAccess: true,
-        fields: '*',
-        // fields: 'nextPageToken, files(id, name)',
-    });
-
-    const upd = await drive.permissions.create({
-        fileId: '0B_uEsCKoieGEc3RhcnRlcl9maWxl',
-        // transferOwnership: true,
-        // useDomainAdminAccess: true,
-        fields: '*',
-        requestBody: {
-            emailAddress: 'andpr99@gmail.com',
-            role: 'writer',
-            type: 'user',
-        },
-        // fields: 'nextPageToken, files(id, name)',
-    });
-
-    const newone = await drive.permissions.get({
-        fileId: '0B_uEsCKoieGEc3RhcnRlcl9maWxl',
-        permissionId: upd.data.id,
-        // supportsAllDrives: true,
-        // useDomainAdminAccess: true,
-        fields: '*',
-        // fields: 'nextPageToken, files(id, name)',
-    });
-
-    console.log(upd, newone);
-
-    return res.data;
-}
-
-if (module === require.main) {
-    runSample().catch(console.error);
-}
-
-// Exports for unit testing purposes
 module.exports = GoogleDriveClient;
