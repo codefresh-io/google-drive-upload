@@ -1,5 +1,5 @@
+version: "1.0"
 kind: step-type
-version: '1.0'
 metadata:
   name: codefresh-inc/google-drive-upload
   isPublic: true
@@ -19,6 +19,7 @@ metadata:
     type: svg
     url: https://upload.wikimedia.org/wikipedia/commons/7/75/Google_Drive_Logo.svg
     background: "#f4f4f4"
+  version: 0.0.1
   examples:
     - description: example-1
       workflow:
