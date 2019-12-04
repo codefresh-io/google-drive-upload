@@ -5,9 +5,8 @@ metadata:
   isPublic: true
   description: Uploads files to Google Drive
   sources:
-    - >-
-      https://github.com/codefresh-io/google-drive-upload
-  stage: graduated
+    - 'https://github.com/codefresh-io/google-drive-upload'
+  stage: incubating
   maintainers:
     - name: Andrii Shaforostov
       email: andrii@codefresh.io
@@ -19,7 +18,7 @@ metadata:
     type: svg
     url: https://upload.wikimedia.org/wikipedia/commons/a/ad/Logo_of_Google_Drive.svg
     background: "#f4f4f4"
-  version: 0.0.2
+  version: 0.0.3
   examples:
     - description: example-1
       workflow:
@@ -28,12 +27,11 @@ metadata:
           upload:
             title: Upload to Google Drive
             type: codefresh-inc/google-drive-upload
-            environment:
-              - GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY=<base64_encoded_service_account_private_key>
             arguments:
               USER_EMAIL: user@gmail.com
               SERVICE_ACCOUNT_EMAIL: servicename@projectname.iam.gserviceaccount.com
               UPLOAD_FILE_1: ["./README.md", "README.md", "text/plain"]
+              GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY: key_value
 spec:
   arguments: |-
     {
@@ -62,6 +60,11 @@ spec:
                 },
                 "description": "File description. Array from `path`, `file name on Drive`, `MIME type`",
                 "examples": [["./README.md", "README.md", "text/plain"]]
+            },
+            "GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY": {
+                "type": "string",
+                "description": "Google service account private key encoded to base64",
+                "examples": ["your key"]
             }
         }
     }
@@ -70,6 +73,8 @@ spec:
       title: Upload to Google Drive
       image: codefresh/google-drive-plugin
       environment:
-        - USER_EMAIL=${{USER_EMAIL}}
-        - SERVICE_ACCOUNT_EMAIL=${{SERVICE_ACCOUNT_EMAIL}}
-        - UPLOAD_FILE_1=${{UPLOAD_FILE_1}}
+        - 'USER_EMAIL=${{USER_EMAIL}}'
+        - 'SERVICE_ACCOUNT_EMAIL=${{SERVICE_ACCOUNT_EMAIL}}'
+        - 'UPLOAD_FILE_1=${{UPLOAD_FILE_1}}'
+        - >-
+          GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY=${{GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY}}

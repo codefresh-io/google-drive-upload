@@ -15,6 +15,11 @@ plugin()
             console.error(`_error ${index + 1}_`);
             console.error(`message: ${error.message}\n`);
         });
+
+        if (response.error.length) {
+            process.exit(1);
+        };
+
     })
     .catch((e) => {
         console.error(e);
