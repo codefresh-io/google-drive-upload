@@ -7,7 +7,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "bluebird": "^3.5.5",
+    "bluebird": "^3.7.2",
     "googleapis": "^42.0.0",
     "lodash": "^4.17.13"
   },
